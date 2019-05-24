@@ -22,7 +22,9 @@ const styles = {
 };
 
 function ButtonAppBar(props) {
+
     const { classes } = props;
+    classes.name = localStorage.getItem('user');
     return (
         <div className={classes.root}>
             <AppBar position="static">
@@ -33,7 +35,7 @@ function ButtonAppBar(props) {
                     <Typography variant="h6" color="inherit" className={classes.grow}>
                         CoffeeBuzz
                     </Typography>
-                    <Button color="inherit">Login</Button>
+                    <Button color="inherit">{classes.name}</Button>
                 </Toolbar>
             </AppBar>
         </div>

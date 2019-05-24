@@ -18,6 +18,7 @@ function login(user) {
             .then(
                 user => {
                     dispatch(success(user));
+                    history.push('/menu');
                     dispatch(alertActions.success('Login successful'))
                 },
                 error => {
