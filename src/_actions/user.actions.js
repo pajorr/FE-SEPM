@@ -10,14 +10,15 @@ export const userActions = {
     menu,
 };
 
-function login(username, password) {
+function login(user) {
     return dispatch => {
-        dispatch(request({ username }));
+        dispatch(request(user));
 
-        userService.login(username, password)
+        userService.login(user)
             .then(
                 user => {
                     dispatch(success(user));
+                    dispatch(alertActions.success('Login successful'))
                 },
                 error => {
                     dispatch(failure(error.toString()));
@@ -26,9 +27,9 @@ function login(username, password) {
             );
     };
 
-    function request(user) { return { type: userConstants.LOGIN_REQUEST } }
+    function request(user) { return { type: userConstants.LOGIN_REQUEST, user } }
     function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } } //TODO delete user
-    function failure(error) { return { type: userConstants.LOGIN_FAILURE } }
+    function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
 }
 
 function logout() {

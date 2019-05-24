@@ -5,13 +5,15 @@ export const userService = {
     menu,
 };
 
-function login(username, password) {
+function login(user) {
     const requestOptions = {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user)
     };
 
-    return fetch('https://my-json-server.typicode.com/pajorr/testjson/db', requestOptions)
+    console.log(JSON.stringify(user));
+    return fetch('http://157.230.253.253:5000/login', requestOptions)
         .then(handleResponse)
         .then(user => {
             localStorage.setItem('user', JSON.stringify(user));
