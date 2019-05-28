@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {userActions} from "../../_actions/user.actions";
 
-class Menu extends React.Component {
+class Menufood extends React.Component {
     constructor(props) {
         super(props);
 
@@ -11,35 +11,35 @@ class Menu extends React.Component {
         };
         this.handleLoad();
         this.handleOrder = this.handleOrder.bind(this);
-
     };
 
     handleLoad(e) {
         const { dispatch } = this.props;
-        dispatch(userActions.menu());
+        dispatch(userActions.menufood());
     }
 
     handleOrder(order) {
         const { dispatch } = this.props;
-        dispatch(userActions.order(order));
+        dispatch(userActions.orderfood(order));
     }
+
 
     render(){
         const loading = (<div>Loading...</div>);
         const self = this;
-        const { menuing } = this.props;
+        const { menufooding } = this.props;
         let orderId = 0;
 
-        let content = JSON.parse(localStorage.getItem("drinks")).map( function(res) {
+        let content = JSON.parse(localStorage.getItem('food')).map( function(res) {
             return <div>
                 <div id={orderId}>
-                    { res.name + " " + res.size + " " + res.price + " " + res.description } </div>
-                    <div>
-                        <img src={res.image} width="200" height="200"/> <button onClick={function(e) {
-                            self.handleOrder(res.name);
-                        }}>Order</button>
-                    </div>
+                    { res.name + " " + res.price + " " + res.description } </div>
+                <div>
+                    <img src={res.image} width="200" height="200"/> <button onClick={function(e) {
+                    self.handleOrder(res.name);
+                }}>Order</button>
                 </div>
+            </div>
         });
         console.log(content);
 
@@ -59,11 +59,11 @@ class Menu extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { menuing } = state.readmenu;
+    const { menufooding } = state.readmenu;
     return {
-        menuing
+        menufooding
     };
 }
 
-const connectedMenuPage = connect(mapStateToProps)(Menu);
-export { connectedMenuPage as Menu };
+const connectedMenuPage = connect(mapStateToProps)(Menufood);
+export { connectedMenuPage as Menufood };

@@ -7,6 +7,10 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { Link } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
+import { history } from "../../_helpers/history";
+import './Toolbar.css';
 
 const styles = {
     root: {
@@ -19,31 +23,41 @@ const styles = {
         marginLeft: -12,
         marginRight: 20,
     },
+
 };
 
-function ButtonAppBar(props) {
+class ToolbarApp extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
-    const { classes } = props;
-    classes.name = localStorage.getItem('user');
-    return (
-        <div className={classes.root}>
-            <AppBar position="static">
-                <Toolbar>
-                    <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" color="inherit" className={classes.grow}>
-                        CoffeeBuzz
-                    </Typography>
-                    <Button color="inherit">{classes.name}</Button>
-                </Toolbar>
-            </AppBar>
-        </div>
-    );
+    render() {
+        const { classes } = this.props;
+        classes.name = localStorage.getItem('user');
+        return (
+            <div className={classes.root}>
+                <AppBar position="static">
+                    <Toolbar>
+                        <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+                            <MenuIcon/>
+                        </IconButton>
+                        <Router history={history}>
+                            <Typography variant="h6" color="inherit" className={classes.grow}>
+                                <Link to="/" className="Home">CoffeeBuzz</Link>
+                            </Typography>
+                         <Link to="/menu" className="Link">Drinks</Link>
+                            <Link to="/showfood" className="Link">Food</Link>
+                        </Router>
+                        <Button color="inherit">{classes.name}</Button>
+                    </Toolbar>
+                </AppBar>
+            </div>
+        );
+    }
 }
 
-ButtonAppBar.propTypes = {
+ToolbarApp.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ButtonAppBar);
+export default withStyles(styles)(ToolbarApp);

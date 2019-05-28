@@ -8,6 +8,9 @@ export const userActions = {
     logout,
     register,
     menu,
+    menufood,
+    order,
+    orderfood
 };
 
 function login(user) {
@@ -79,4 +82,58 @@ function menu() {
 
     function success() { return { type: userConstants.MENU_SUCCESS } }
     function failure() { return { type: userConstants.MENU_FAILURE} }
+}
+
+function menufood() {
+    return dispatch => {
+        userService.menufood()
+            .then(
+                res => {
+                    dispatch(success());
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            )
+    }
+
+    function success() { return { type: userConstants.MENU_SUCCESS } }
+    function failure() { return { type: userConstants.MENU_FAILURE} }
+}
+
+function order(order) {
+    return dispatch => {
+        userService.order(order)
+            .then(
+                res => {
+                    dispatch(success());
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            )
+    }
+
+    function success() { return { type: userConstants.ORDER_SUCCESS } }
+    function failure() { return { type: userConstants.ORDER_FAILURE} }
+}
+
+function orderfood(order) {
+    return dispatch => {
+        userService.orderfood(order)
+            .then(
+                res => {
+                    dispatch(success());
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            )
+    }
+
+    function success() { return { type: userConstants.ORDER_SUCCESS } }
+    function failure() { return { type: userConstants.ORDER_FAILURE} }
 }

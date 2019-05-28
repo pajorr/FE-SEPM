@@ -7,6 +7,7 @@ import { history } from "../../_helpers/history";
 import { Menu } from "../menu/Menu";
 import { Login } from "../login/Login";
 import { Register } from "../register/Register";
+import {Menufood} from "../menufood/Menufood";
 
 class App extends React.Component {
   // constructor(props) {
@@ -30,6 +31,7 @@ class App extends React.Component {
                             <Route exact path="/" component={Login} />
                             <Route path="/register" component={Register} />
                             <Route path="/menu" component={Menu} />
+                            <Route path="/showfood" component={Menufood} />
                         </div>
                     </Router>
                 </div>
